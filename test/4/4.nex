@@ -1,0 +1,111 @@
+Math ->
+      _ $math _             :Math(math = AddSub)
+
+AddSub ->
+	  $left _ "+" _ $right  :Add(left = float, right = float)
+	| $left _ "-" _ $right  :Sub(left = float, right = float)
+	| $default              :Default(default = float)
+
+
+float -> 
+	  $int "." $fract       :Decimal(int = int, fract = int)
+	| $int                  :Integer(int = int)
+
+int -> 
+	  [0-9]:+               :Integer
+
+_ -> 
+	  [\s]:*                :Whitespace 
+
+# Math:Math(math = AddSub) -> _ $math _
+#
+# AddSub:Add(left = float, right = float) -> $left _ "+" _ $right
+# AddSub:Sub(left = float, right = float) -> $left _ "-" _ $right
+# AddSub:Default(default = float) -> $default
+#
+# float:Decimal(int = int, fract = int) -> $int "." $fract
+# float:Integer(int = int) -> $int
+#
+# int:Integer -> [0-9]:+
+#
+# _:Whitespace -> [\s]:*
+
+checkpoint
+
+
+
+#
+# support more than 2 operands in an expression
+#
+
+modify AddSub:Add(left = AddSub)
+modify AddSub:Sub(left = AddSub)
+
+checkpoint
+
+
+
+#
+# add multiplication
+#
+
+MultDiv ->
+	  $left _ "*" _ $right  :Mult(left = MultDiv, right = float)
+	| $left _ "/" _ $right  :Div(left = MultDiv, right = float)
+	| $default              :Default(default = float)
+
+# MultDiv:Mult(left = MultDiv, right = float) -> $left _ "*" _ $right
+# MultDiv:Div(left = MultDiv, right = float) -> $left _ "/" _ $right
+# MultDiv:Default(default = float) -> $default
+
+modify AddSub:Add(right = MultDiv)
+modify AddSub:Add(right = MultDiv)
+modify AddSub:Default(default = MultDiv)
+
+checkpoint
+
+
+
+#
+# support parentheses
+#
+
+Parentheses ->
+      "(" _ $expr _ ")"     :Par(expr = AddSub)
+	| $default              :Default(default = float)
+
+# Parentheses:Par(expr = AddSub) -> "(" _ $expr _ ")"
+# Parentheses:Default(default = float) -> $default
+
+modify MultDiv:Mult(right = Parentheses)
+modify MultDiv:Div(right = Parentheses)
+modify MultDiv:Default(default = Parentheses)
+
+checkpoint
+
+
+#
+# exponent ^
+#
+
+Exponent ->
+      $left _ "^" _ $right      :Exp(left = Parentheses, right = Exponent)
+    | $default                  :Default(default = Parentheses)
+    
+# Exponent:Exp(left = Parentheses, right = Exponent) -> $left _ "^" _ $right 
+# Exponent:Default(default = Parentheses) -> $default
+    
+modify MultDiv:Mult(right = Exponent)
+modify MultDiv:Div(right = Exponent)
+modify MultDiv:Default(default = Exponent)
+
+checkpoint
+
+#
+# exponent **
+#
+
+extend Exponent ->
+      $left _ "**" _ $right     :ExpAst(left = Parentheses, right = Exponent)
+
+# Exponent:ExpAst(left = Parentheses, right = Exponent) -> $left _ "**" _ $right     

@@ -1,0 +1,135 @@
+[
+    {
+        "type": "Program",
+        "prog": [
+            {
+                "type": "JavaScriptBlock",
+                "body": {
+                    "type": "JavaScript",
+                    "script": "\n\tfunction SomeJavascipt(){}\n"
+                }
+            },
+            {
+                "type": "Ruleset",
+                "set": "Math",
+                "rules": [
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            "_",
+                            "AddSub",
+                            "_"
+                        ],
+                        "postprocess": {
+                            "type": "JavaScript",
+                            "script": " js in ruleset "
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "Ruleset",
+                "set": "AddSub",
+                "rules": [
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            "AddSub",
+                            "_",
+                            {
+                                "type": "Literal",
+                                "literal": "+"
+                            },
+                            "_",
+                            "float"
+                        ],
+                        "postprocess": {
+                            "type": "JavaScript",
+                            "script": " js in rule modification "
+                        }
+                    },
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            "AddSub",
+                            "_",
+                            {
+                                "type": "Literal",
+                                "literal": "-"
+                            },
+                            "_",
+                            "float"
+                        ]
+                    },
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            "float"
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Ruleset",
+                "set": "float",
+                "rules": [
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            "int",
+                            {
+                                "type": "Literal",
+                                "literal": "."
+                            },
+                            "int"
+                        ]
+                    },
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            "int"
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Ruleset",
+                "set": "int",
+                "rules": [
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            {
+                                "type": "Ebnf",
+                                "ebnf": {
+                                    "type": "CharClass",
+                                    "regex": "[0-9]"
+                                },
+                                "modifier": ":+"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Ruleset",
+                "set": "_",
+                "rules": [
+                    {
+                        "type": "Rule",
+                        "tokens": [
+                            {
+                                "type": "Ebnf",
+                                "ebnf": {
+                                    "type": "CharClass",
+                                    "regex": "[\\s]"
+                                },
+                                "modifier": ":*"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

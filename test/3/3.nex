@@ -1,0 +1,28 @@
+@{%
+	function SomeJavascipt(){}
+%}
+
+Math ->
+      _ $math _             :Math(math = AddSub) {% js in ruleset %}
+
+AddSub ->
+	  $left _ "+" _ $right  :Add(left = float, right = float)
+	| $left _ "-" _ $right  :Sub(left = float, right = float)
+	| $default              :Default(default = float)
+
+
+float -> 
+	  $int "." $fract       :Decimal(int = int, fract = int)
+	| $int                  :Integer(int = int)
+
+int -> 
+	  [0-9]:+               :Integer
+
+_ -> 
+	  [\s]:*                :Whitespace 
+
+
+modify AddSub:Add(left = AddSub) -> {% js in rule modification %}
+modify AddSub:Sub(left = AddSub)
+
+Exponent:ExpAst(left = Parentheses, right = Exponent) -> $left _ "**" _ $right {% js in rule %}

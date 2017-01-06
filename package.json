@@ -1,0 +1,21 @@
+{
+  "name": "nex",
+  "version": "0.0.1",
+  "description": "Extendable Nearley Grammar",
+  "main": "nex.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "nearleyc nex.ne -o parser.js"
+  },
+  "keywords": [
+    "nearley",
+    "nex",
+    "grammar",
+    "parser"
+  ],
+  "author": "Klavs Prieditis",
+  "license": "MIT",
+  "devDependencies": {
+    "nearley": "^2.7.10"
+  }
+}
