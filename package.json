@@ -4,8 +4,8 @@
   "description": "Extendable Nearley Grammar",
   "main": "nex.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "nearleyc nex.ne -o parser.js"
+    "test": "mocha",
+    "build": "nearleyc grammar.ne -o grammar.js"
   },
   "keywords": [
     "nearley",
@@ -16,6 +16,11 @@
   "author": "Klavs Prieditis",
   "license": "MIT",
   "devDependencies": {
+    "mocha": "^3.2.0",
+    "nearley": "^2.7.10"
+  },
+  "dependencies": {
+    "get-stdin": "^5.0.1",
     "nearley": "^2.7.10"
   }
 }
