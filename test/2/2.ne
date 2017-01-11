@@ -3,20 +3,19 @@
 %}
 
 Math ->
-      _ AddSub _ {% js in ruleset %}
+	  _ AddSub _ {% js in ruleset %}
 
 AddSub ->
 	  AddSub _ "+" _ float {% js in rule modification %}
 	| AddSub _ "-" _ float
 	| float
 
-
-float -> 
+float ->
 	  int "." int
 	| int
 
-int -> 
+int ->
 	  [0-9]:+
 
-_ -> 
+_ ->
 	  [\s]:*
