@@ -93,7 +93,7 @@ var grammar = {
     {"name": "tielist", "symbols": ["tielink"]},
     {"name": "tielist", "symbols": ["tielist", "whit?", {"literal":","}, "whit?", "tielink"], "postprocess": d => d[0].concat([d[4]])},
     {"name": "tielink", "symbols": ["word", "whit?", {"literal":"="}, "whit?", "word"], "postprocess": d => ({type:"Tie", tie: d[0], link: d[4]})},
-    {"name": "expr_member", "symbols": ["word"], "postprocess": id},
+    {"name": "expr_member", "symbols": ["word"], "postprocess": function(d) {return { type:"RulesetRef", token: d[0]}}},
     {"name": "expr_member", "symbols": [{"literal":"$"}, "word"], "postprocess": function(d) {return { type: "Mixin", mixin: d[1]}}},
     {"name": "expr_member", "symbols": ["word", {"literal":"["}, "expressionlist", {"literal":"]"}], "postprocess": function(d) {return {type:"MacroCall", macrocall: d[0], args: d[2]}}},
     {"name": "expr_member", "symbols": ["string"], "postprocess": id},

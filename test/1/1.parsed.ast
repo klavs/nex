@@ -16,12 +16,18 @@
                     {
                         "type": "Rule",
                         "tokens": [
-                            "_",
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
                             {
                                 "type": "Mixin",
                                 "mixin": "math"
                             },
-                            "_"
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            }
                         ],
                         "postprocess": {
                             "type": "JavaScript",
@@ -49,12 +55,18 @@
                                 "type": "Mixin",
                                 "mixin": "left"
                             },
-                            "_",
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
                             {
                                 "type": "Literal",
                                 "literal": "+"
                             },
-                            "_",
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
                             {
                                 "type": "Mixin",
                                 "mixin": "right"
@@ -81,12 +93,18 @@
                                 "type": "Mixin",
                                 "mixin": "left"
                             },
-                            "_",
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
                             {
                                 "type": "Literal",
                                 "literal": "-"
                             },
-                            "_",
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
                             {
                                 "type": "Mixin",
                                 "mixin": "right"

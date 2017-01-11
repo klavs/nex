@@ -47,7 +47,7 @@ tielink ->
       word whit? "=" whit? word {% d => ({type:"Tie", tie: d[0], link: d[4]}) %}
 
 expr_member ->
-      word {% id %}
+      word {% function(d) {return { type:"RulesetRef", token: d[0]}} %}
     | "$" word {% function(d) {return { type: "Mixin", mixin: d[1]}} %}
     | word "[" expressionlist "]" {% function(d) {return {type:"MacroCall", macrocall: d[0], args: d[2]}} %} 
     | string {% id %}
