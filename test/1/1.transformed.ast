@@ -16,9 +16,18 @@
                     {
                         "type": "Rule",
                         "tokens": [
-                            "_",
-                            "AddSub",
-                            "_"
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
+                            {
+                                "type": "RulesetRef",
+                                "token": "AddSub"
+                            },
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            }
                         ],
                         "postprocess": {
                             "type": "JavaScript",
@@ -34,33 +43,60 @@
                     {
                         "type": "Rule",
                         "tokens": [
-                            "float",
-                            "_",
+                            {
+                                "type": "RulesetRef",
+                                "token": "float"
+                            },
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
                             {
                                 "type": "Literal",
                                 "literal": "+"
                             },
-                            "_",
-                            "float"
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
+                            {
+                                "type": "RulesetRef",
+                                "token": "float"
+                            }
                         ]
                     },
                     {
                         "type": "Rule",
                         "tokens": [
-                            "float",
-                            "_",
+                            {
+                                "type": "RulesetRef",
+                                "token": "float"
+                            },
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
                             {
                                 "type": "Literal",
                                 "literal": "-"
                             },
-                            "_",
-                            "float"
+                            {
+                                "type": "RulesetRef",
+                                "token": "_"
+                            },
+                            {
+                                "type": "RulesetRef",
+                                "token": "float"
+                            }
                         ]
                     },
                     {
                         "type": "Rule",
                         "tokens": [
-                            "float"
+                            {
+                                "type": "RulesetRef",
+                                "token": "float"
+                            }
                         ]
                     }
                 ]
@@ -72,18 +108,27 @@
                     {
                         "type": "Rule",
                         "tokens": [
-                            "int",
+                            {
+                                "type": "RulesetRef",
+                                "token": "int"
+                            },
                             {
                                 "type": "Literal",
                                 "literal": "."
                             },
-                            "int"
+                            {
+                                "type": "RulesetRef",
+                                "token": "int"
+                            }
                         ]
                     },
                     {
                         "type": "Rule",
                         "tokens": [
-                            "int"
+                            {
+                                "type": "RulesetRef",
+                                "token": "int"
+                            }
                         ]
                     }
                 ]

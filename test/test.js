@@ -1,6 +1,7 @@
 const assert = require("assert");
 const fs = require("fs");
 const generate = require("../generator");
+const transform = require("../transformer");
 
 const doFullTest = function(testPath){
   try {
@@ -11,9 +12,13 @@ const doFullTest = function(testPath){
   } catch (e){}
   describe("@"+testPath, _ => {
     // it("should correctly parse .nex into .parsed.ast", () => assert.equal(true, false))
-    // it("should correctly transform .parsed.ast into .transformed.ast", () => assert.equal(true, false))
+    it("should correctly transform .parsed.ast into .transformed.ast", () => testTransform(parsed, transformed))
     it("should correctly generate .transformed.ast into .ne", () => testGenerator(transformed, generated))
   })
+}
+
+const testTransform = function(parsed, transformed){
+  assert.equal(transform(JSON.parse(parsed)), JSON.parse(transformed))
 }
 
 const testGenerator = function(transformed, generated){
