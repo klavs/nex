@@ -18,7 +18,7 @@ const doFullTest = function(testPath){
 }
 
 const testTransform = function(parsed, transformed){
-  assert.equal(transform(JSON.parse(parsed)), JSON.parse(transformed))
+  assert.deepEqual(transform(JSON.parse(parsed)), JSON.parse(transformed))
 }
 
 const testGenerator = function(transformed, generated){

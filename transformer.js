@@ -55,13 +55,15 @@ const transform = (ast) => {
             delete rule.name;
         }))
 
+    nex.prog = nex.prog.filter(prod => !prod._markedForDeletion)
+
     nex.prog.filter(prod => prod.type === "Ruleset")
         .forEach(set => set.rules.forEach(rule => {
             delete rule.ties;
             delete rule.name;
+            delete rule._markedForDeletion;
         }))
 
-    nex.prog = nex.prog.filter(prod => !prod._markedForDeletion)
 
     return [nex];
 
